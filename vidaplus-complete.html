@@ -1,0 +1,1348 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VidaPlus - Sistema de Gestão Hospitalar</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Navbar */
+        nav {
+            background-color: white;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #16a34a;
+            cursor: pointer;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background-color: #16a34a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            flex: 1;
+            margin-left: 3rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #666;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #16a34a;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-primary {
+            background-color: #16a34a;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #15803d;
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: #16a34a;
+            padding: 0.75rem 1.5rem;
+            border: 2px solid #16a34a;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background-color: #16a34a;
+            color: white;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 200px;
+            height: 100vh;
+            background-color: #f9f9f9;
+            border-right: 1px solid #e0e0e0;
+            padding: 2rem 0;
+            display: none;
+            flex-direction: column;
+            gap: 1rem;
+            z-index: 50;
+        }
+
+        .sidebar.active {
+            display: flex;
+        }
+
+        .sidebar-item {
+            padding: 1rem 1.5rem;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+
+        .sidebar-item:hover,
+        .sidebar-item.active {
+            background-color: #f0fdf4;
+            color: #16a34a;
+            border-left-color: #16a34a;
+        }
+
+        /* Pages */
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Home Page */
+        .hero {
+            background: linear-gradient(135deg, #f0fdf4 0%, #e0f7f4 100%);
+            padding: 4rem 2rem;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            color: #1a1a1a;
+            margin-bottom: 1rem;
+        }
+
+        .hero .highlight {
+            color: #16a34a;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        section h2 {
+            color: #16a34a;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            border-bottom: 2px solid #16a34a;
+            padding-bottom: 0.5rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .feature-card {
+            padding: 1.5rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            border-color: #16a34a;
+            box-shadow: 0 4px 12px rgba(22, 163, 74, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-card p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* Login Page */
+        .login-container {
+            display: flex;
+            height: calc(100vh - 60px);
+        }
+
+        .login-left {
+            flex: 1;
+            background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 3rem;
+            text-align: center;
+        }
+
+        .login-left h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .login-left p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .login-right {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 3rem;
+            background-color: white;
+        }
+
+        .login-form {
+            max-width: 400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .login-form h2 {
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+            border: none;
+            padding: 0;
+        }
+
+        .login-form p {
+            color: #666;
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+        }
+
+        .user-type-selector {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .user-type-btn {
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            background-color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .user-type-btn:hover,
+        .user-type-btn.selected {
+            border-color: #16a34a;
+            background-color: #f0fdf4;
+            color: #16a34a;
+        }
+
+        .user-type-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .user-type-label {
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #1a1a1a;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #16a34a;
+            box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.1);
+        }
+
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .form-options a {
+            color: #16a34a;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .form-options a:hover {
+            text-decoration: underline;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .login-form .btn-primary {
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+
+        .signup-link {
+            text-align: center;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .signup-link a {
+            color: #16a34a;
+            text-decoration: none;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Dashboard */
+        .dashboard-container {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .dashboard-sidebar {
+            width: 250px;
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            height: fit-content;
+        }
+
+        .user-card {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .user-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #16a34a;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.5rem;
+            margin: 0 auto 1rem;
+        }
+
+        .user-name {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .user-role {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .menu-items {
+            list-style: none;
+        }
+
+        .menu-item {
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #666;
+        }
+
+        .menu-item:hover,
+        .menu-item.active {
+            background-color: #f0fdf4;
+            color: #16a34a;
+        }
+
+        .dashboard-main {
+            flex: 1;
+        }
+
+        .welcome-section {
+            background: linear-gradient(135deg, #f0fdf4 0%, #e0f7f4 100%);
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+
+        .welcome-section h1 {
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+        }
+
+        .welcome-section p {
+            color: #666;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-card-label {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #16a34a;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card-icon {
+            font-size: 2rem;
+            float: right;
+            opacity: 0.3;
+        }
+
+        .consultation-card {
+            background-color: white;
+            border-left: 4px solid #16a34a;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .doctor-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .doctor-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #16a34a;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-right: 1rem;
+        }
+
+        .doctor-details h3 {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        .doctor-details p {
+            margin: 0.25rem 0 0 0;
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .status-badge {
+            display: inline-block;
+            background-color: #fef3c7;
+            color: #92400e;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-top: 0.5rem;
+        }
+
+        .time-info {
+            color: #666;
+            font-size: 0.95rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Video Call */
+        .video-call-container {
+            background-color: #000;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            position: relative;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            width: 100%;
+            height: 100%;
+            padding: 1rem;
+        }
+
+        .video-frame {
+            background-color: #1a1a1a;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .video-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        .video-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .video-role {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin-top: 0.5rem;
+        }
+
+        .video-controls {
+            position: absolute;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
+            z-index: 10;
+        }
+
+        .control-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: none;
+            background-color: #16a34a;
+            color: white;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: background-color 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .control-btn:hover {
+            background-color: #15803d;
+        }
+
+        .control-btn.danger {
+            background-color: #dc2626;
+        }
+
+        .control-btn.danger:hover {
+            background-color: #b91c1c;
+        }
+
+        .video-header {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            right: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .call-timer {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 0.75rem 1.5rem;
+            border-radius: 20px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .call-info {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .call-info h2 {
+            margin: 0;
+            font-size: 1.2rem;
+        }
+
+        .call-info p {
+            margin: 0.25rem 0 0 0;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Telemedicina Page */
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .step {
+            text-align: center;
+        }
+
+        .step-number {
+            font-size: 2.5rem;
+            color: #16a34a;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .step h3 {
+            margin-bottom: 0.5rem;
+            color: #1a1a1a;
+        }
+
+        .step p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .requirements {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .requirement-item {
+            background-color: #f0fdf4;
+            padding: 1.5rem;
+            border-radius: 4px;
+            border-left: 4px solid #16a34a;
+        }
+
+        .requirement-item h3 {
+            color: #16a34a;
+            margin-bottom: 0.5rem;
+        }
+
+        .requirement-item p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .security-list {
+            list-style: none;
+            margin-top: 1.5rem;
+        }
+
+        .security-list li {
+            padding: 0.75rem 0;
+            color: #555;
+            border-bottom: 1px solid #eee;
+        }
+
+        .security-list li:before {
+            content: "✓ ";
+            color: #16a34a;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        .security-list li:last-child {
+            border-bottom: none;
+        }
+
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .quick-action-btn {
+            background-color: #f0fdf4;
+            border: 2px solid #16a34a;
+            color: #16a34a;
+            padding: 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .quick-action-btn:hover {
+            background-color: #16a34a;
+            color: white;
+        }
+
+        footer {
+            background-color: #1a1a1a;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-wrap: wrap;
+            }
+
+            nav ul {
+                flex-basis: 100%;
+                margin-left: 0;
+                gap: 1rem;
+            }
+
+            .login-container {
+                flex-direction: column;
+            }
+
+            .login-left {
+                padding: 2rem;
+            }
+
+            .login-right {
+                padding: 2rem;
+            }
+
+            .dashboard-container {
+                flex-direction: column;
+            }
+
+            .dashboard-sidebar {
+                width: 100%;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .user-type-selector {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo" onclick="showPage('home')">
+            <div class="logo-icon">V</div>
+            <span>VidaPlus</span>
+        </div>
+        <ul>
+            <li><a onclick="showPage('home')">Funcionalidades</a></li>
+            <li><a onclick="showPage('home')">Para Quem</a></li>
+            <li><a onclick="showPage('login')">Acessar Sistema</a></li>
+        </ul>
+        <div class="nav-buttons">
+            <button class="btn-secondary" onclick="showPage('login')">Acessar Sistema</button>
+        </div>
+    </nav>
+
+    <!-- Home Page -->
+    <div id="home" class="page active">
+        <div class="hero">
+            <h1>Transforme a gestão da saúde com <span class="highlight">tecnologia e eficiência</span></h1>
+            <p>Plataforma completa para hospitais, clínicas e serviços de saúde. Agendamento, telemedicina, prontuário eletrônico e muito mais em um só lugar.</p>
+            <div class="hero-buttons">
+                <button class="btn-primary" onclick="showPage('login')">Começar Agora</button>
+                <button class="btn-secondary">Conhecer Funcionalidades</button>
+            </div>
+        </div>
+
+        <div class="container">
+            <!-- Funcionalidades -->
+            <section>
+                <h2>Funcionalidades Completas</h2>
+                <p style="color: #666; margin-bottom: 1.5rem;">Tudo que você precisa para uma gestão hospitalar moderna e eficiente</p>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">📅</div>
+                        <h3>Agendamento Inteligente</h3>
+                        <p>Agende consultas e exames de forma rápida e prática, com confirmação automática.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎥</div>
+                        <h3>Telemedicina</h3>
+                        <p>Consultas online com seus médicos, sem sair de casa, com total segurança.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📋</div>
+                        <h3>Prontuário Eletrônico</h3>
+                        <p>Acesse todo seu histórico médico em um só lugar, sempre disponível.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔒</div>
+                        <h3>Segurança LGPD</h3>
+                        <p>Seus dados protegidos com criptografia e conformidade total com a LGPD.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">👥</div>
+                        <h3>Gestão de Equipes</h3>
+                        <p>Coordene profissionais de saúde e otimize o atendimento hospitalar.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3>Monitoramento em Tempo Real</h3>
+                        <p>Acompanhe leitos, internações e recursos hospitalares instantaneamente.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Para Quem -->
+            <section>
+                <h2>Feito Para Você</h2>
+                <p style="color: #666; margin-bottom: 1.5rem;">Interfaces personalizadas para cada tipo de usuário</p>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🧑‍⚕️</div>
+                        <h3>Pacientes</h3>
+                        <p>Gerencie suas consultas, exames e prontuário médico de forma simples e segura.</p>
+                        <button class="btn-primary" style="margin-top: 1rem; width: 100%;" onclick="showPage('login')">Acessar</button>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">👨‍⚕️</div>
+                        <h3>Profissionais</h3>
+                        <p>Organize sua agenda, acesse prontuários e realize teleconsultas com eficiência.</p>
+                        <button class="btn-primary" style="margin-top: 1rem; width: 100%;" onclick="showPage('login')">Acessar</button>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⚙️</div>
+                        <h3>Administradores</h3>
+                        <p>Controle total sobre recursos, equipes e operações hospitalares.</p>
+                        <button class="btn-primary" style="margin-top: 1rem; width: 100%;" onclick="showPage('login')">Acessar</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA -->
+            <section style="text-align: center; background: linear-gradient(135deg, #f0fdf4 0%, #e0f7f4 100%);">
+                <h2 style="border: none;">Pronto para modernizar sua gestão de saúde?</h2>
+                <p style="color: #666; margin-bottom: 1.5rem;">Junte-se a centenas de instituições que já confiam no VidaPlus</p>
+                <button class="btn-primary" onclick="showPage('login')">Começar Gratuitamente</button>
+            </section>
+        </div>
+    </div>
+
+    <!-- Login Page -->
+    <div id="login" class="page">
+        <div class="login-container">
+            <div class="login-left">
+                <h1>Bem-vindo ao futuro da <span style="color: #fff;">gestão hospitalar</span></h1>
+                <p>Acesse sua conta para gerenciar consultas, prontuários e muito mais de forma segura e eficiente.</p>
+                <div class="stats">
+                    <div class="stat">
+                        <div class="stat-number">99.9%</div>
+                        <div class="stat-label">Disponibilidade</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">LGPD</div>
+                        <div class="stat-label">Conformidade</div>
+                    </div>
+                </div>
+            </div>
+            <div class="login-right">
+                <div class="login-form">
+                    <h2>Entrar no Sistema</h2>
+                    <p>Selecione seu perfil e faça login para continuar</p>
+
+                    <div class="user-type-selector">
+                        <button class="user-type-btn selected" onclick="selectUserType(this, 'paciente')">
+                            <div class="user-type-icon">🧑‍⚕️</div>
+                            <div class="user-type-label">Paciente</div>
+                        </button>
+                        <button class="user-type-btn" onclick="selectUserType(this, 'profissional')">
+                            <div class="user-type-icon">👨‍⚕️</div>
+                            <div class="user-type-label">Profissional</div>
+                        </button>
+                        <button class="user-type-btn" onclick="selectUserType(this, 'admin')">
+                            <div class="user-type-icon">⚙️</div>
+                            <div class="user-type-label">Admin</div>
+                        </button>
+                    </div>
+
+                    <div class="form-group">
+                        <label>E-mail</label>
+                        <input type="email" placeholder="seu@email.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Senha</label>
+                        <input type="password" placeholder="••••••••">
+                    </div>
+
+                    <div class="form-options">
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="remember">
+                            <label for="remember" style="margin: 0;">Lembrar-me</label>
+                        </div>
+                        <a onclick="alert('Redirecionando para recuperação de senha...')">Esqueceu a senha?</a>
+                    </div>
+
+                    <button class="btn-primary" onclick="showPage('dashboard')">Entrar</button>
+
+                    <div class="signup-link">
+                        Não tem uma conta? <a onclick="alert('Redirecionando para cadastro...')">Cadastre-se</a>
+                    </div>
+
+                    <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #e0e0e0;">
+                        <p style="font-size: 0.85rem; color: #666; margin-bottom: 0.5rem;">🔒 Segurança e Privacidade</p>
+                        <p style="font-size: 0.8rem; color: #999;">Seus dados são protegidos com criptografia de ponta a ponta e em conformidade total com a LGPD. Todas as ações são registradas em logs de auditoria.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard Page -->
+    <div id="dashboard" class="page">
+        <div class="container">
+            <div class="dashboard-container">
+                <!-- Sidebar -->
+                <div class="dashboard-sidebar">
+                    <div class="user-card">
+                        <div class="user-avatar">J</div>
+                        <div class="user-name">João Silva</div>
+                        <div class="user-role">Paciente</div>
+                    </div>
+                    <ul class="menu-items">
+                        <li class="menu-item active" onclick="switchDashboardTab(this, 'overview')">📊 Dashboard</li>
+                        <li class="menu-item" onclick="switchDashboardTab(this, 'consultas')">📅 Consultas</li>
+                        <li class="menu-item" onclick="switchDashboardTab(this, 'prontuario')">📋 Prontuário</li>
+                        <li class="menu-item" onclick="switchDashboardTab(this, 'telemedicina')">🎥 Telemedicina</li>
+                    </ul>
+                    <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #e0e0e0;">
+                        <p style="font-size: 0.8rem; color: #16a34a; margin-bottom: 0.5rem;">🔒 Protegido por LGPD</p>
+                        <p style="font-size: 0.75rem; color: #999;">Ativo</p>
+                    </div>
+                </div>
+
+                <!-- Main Content -->
+                <div class="dashboard-main">
+                    <!-- Overview Tab -->
+                    <div id="overview-tab" class="dashboard-tab active">
+                        <div class="welcome-section">
+                            <h1>Bem-vindo de volta, João!</h1>
+                            <p>Aqui está um resumo da sua saúde e próximas consultas</p>
+                        </div>
+
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-card-label">Próximas Consultas</div>
+                                <div class="stat-card-value">3</div>
+                                <div class="stat-card-icon">📅</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-card-label">Exames Pendentes</div>
+                                <div class="stat-card-value">2</div>
+                                <div class="stat-card-icon">📊</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-card-label">Consultas Realizadas</div>
+                                <div class="stat-card-value">12</div>
+                                <div class="stat-card-icon">✓</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-card-label">Última Consulta</div>
+                                <div class="stat-card-value" style="font-size: 1.2rem;">3 dias</div>
+                                <div class="stat-card-icon">⏰</div>
+                            </div>
+                        </div>
+
+                        <section>
+                            <h2>Próximas Consultas</h2>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                                <p style="color: #666; margin: 0;">Suas consultas online agendadas</p>
+                                <button class="btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.9rem;">Ver Todas</button>
+                            </div>
+
+                            <div class="consultation-card">
+                                <div class="doctor-info">
+                                    <div class="doctor-avatar">DJO</div>
+                                    <div class="doctor-details">
+                                        <h3>Dr. João Oliveira</h3>
+                                        <p>Clínico Geral</p>
+                                    </div>
+                                </div>
+                                <span class="status-badge">Agendada</span>
+                                <div class="time-info">📅 Hoje às 10:30</div>
+                                <button class="btn-primary" style="width: 100%; margin-top: 1rem;" onclick="showPage('video-call')">Iniciar Teleconsulta</button>
+                            </div>
+
+                            <div class="consultation-card">
+                                <div class="doctor-info">
+                                    <div class="doctor-avatar">DAC</div>
+                                    <div class="doctor-details">
+                                        <h3>Dra. Ana Costa</h3>
+                                        <p>Dermatologia</p>
+                                    </div>
+                                </div>
+                                <span class="status-badge">Agendada</span>
+                                <div class="time-info">📅 Amanhã às 14:00</div>
+                                <button class="btn-primary" style="width: 100%; margin-top: 1rem;" onclick="showPage('video-call')">Iniciar Teleconsulta</button>
+                            </div>
+                        </section>
+
+                        <section>
+                            <h2>Exames Recentes</h2>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                                <p style="color: #666; margin: 0;">Seus exames mais recentes</p>
+                                <button class="btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.9rem;">Ver Mais</button>
+                            </div>
+
+                            <div style="display: grid; gap: 1rem;">
+                                <div style="background-color: #f9f9f9; padding: 1rem; border-radius: 4px; border-left: 4px solid #16a34a;">
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <div>
+                                            <h4 style="margin: 0; margin-bottom: 0.25rem;">Hemograma Completo</h4>
+                                            <p style="margin: 0; color: #666; font-size: 0.9rem;">15/11/2025</p>
+                                        </div>
+                                        <button class="btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.9rem;">Ver</button>
+                                    </div>
+                                </div>
+                                <div style="background-color: #f9f9f9; padding: 1rem; border-radius: 4px; border-left: 4px solid #16a34a;">
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <div>
+                                            <h4 style="margin: 0; margin-bottom: 0.25rem;">Raio-X Tórax</h4>
+                                            <p style="margin: 0; color: #666; font-size: 0.9rem;">10/11/2025</p>
+                                        </div>
+                                        <button class="btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.9rem;">Ver</button>
+                                    </div>
+                                </div>
+                                <div style="background-color: #f9f9f9; padding: 1rem; border-radius: 4px; border-left: 4px solid #16a34a;">
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <div>
+                                            <h4 style="margin: 0; margin-bottom: 0.25rem;">Ultrassom Abdominal</h4>
+                                            <p style="margin: 0; color: #666; font-size: 0.9rem;">05/11/2025</p>
+                                        </div>
+                                        <button class="btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.9rem;">Ver</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section>
+                            <h2>Ações Rápidas</h2>
+                            <div class="quick-actions">
+                                <button class="quick-action-btn">📅 Agendar Consulta</button>
+                                <button class="quick-action-btn">📊 Solicitar Exame</button>
+                                <button class="quick-action-btn">📋 Ver Prontuário</button>
+                            </div>
+                        </section>
+                    </div>
+
+                    <!-- Consultas Tab -->
+                    <div id="consultas-tab" class="dashboard-tab" style="display: none;">
+                        <section>
+                            <h2>Minhas Consultas</h2>
+                            <p style="color: #666; margin-bottom: 1.5rem;">Histórico completo de suas consultas</p>
+                            <div class="consultation-card">
+                                <div class="doctor-info">
+                                    <div class="doctor-avatar">DMS</div>
+                                    <div class="doctor-details">
+                                        <h3>Dra. Maria Santos</h3>
+                                        <p>Cardiologia</p>
+                                    </div>
+                                </div>
+                                <span class="status-badge" style="background-color: #d1fae5; color: #065f46;">Confirmada</span>
+                                <div class="time-info">📅 25 de Novembro, 2025 às 14:00</div>
+                                <div class="time-info">📍 Consultório 302 - Unidade Centro</div>
+                                <div class="time-info" style="color: #16a34a;">🎥 Presencial</div>
+                            </div>
+                        </section>
+                    </div>
+
+                    <!-- Prontuário Tab -->
+                    <div id="prontuario-tab" class="dashboard-tab" style="display: none;">
+                        <section>
+                            <h2>Meu Prontuário</h2>
+                            <p style="color: #666; margin-bottom: 1.5rem;">Histórico médico completo</p>
+                            <div style="background-color: #f9f9f9; padding: 1.5rem; border-radius: 4px;">
+                                <h3 style="margin-top: 0;">Informações Pessoais</h3>
+                                <p><strong>Nome:</strong> João Silva</p>
+                                <p><strong>Data de Nascimento:</strong> 15/03/1990</p>
+                                <p><strong>CPF:</strong> •••••••••••••••</p>
+                                <p><strong>Tipo Sanguíneo:</strong> O+</p>
+                            </div>
+                        </section>
+                    </div>
+
+                    <!-- Telemedicina Tab -->
+                    <div id="telemedicina-tab" class="dashboard-tab" style="display: none;">
+                        <section>
+                            <h2>Telemedicina</h2>
+                            <p style="color: #666; margin-bottom: 1.5rem;">Realize consultas online com segurança</p>
+                            <div class="consultation-card">
+                                <div class="doctor-info">
+                                    <div class="doctor-avatar">DJO</div>
+                                    <div class="doctor-details">
+                                        <h3>Dr. João Oliveira</h3>
+                                        <p>Clínico Geral</p>
+                                    </div>
+                                </div>
+                                <span class="status-badge">Agendada</span>
+                                <div class="time-info">📅 Hoje às 10:30</div>
+                                <button class="btn-primary" style="width: 100%; margin-top: 1rem;" onclick="showPage('video-call')">Iniciar Teleconsulta</button>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Video Call Page -->
+    <div id="video-call" class="page">
+        <div class="video-call-container">
+            <div class="video-header">
+                <div class="call-info">
+                    <h2>Teleconsulta com Dr. João Oliveira</h2>
+                    <p>Clínico Geral</p>
+                </div>
+                <div class="call-timer">⏱️ 00:05:23</div>
+            </div>
+
+            <div class="video-grid">
+                <div class="video-frame">
+                    <div class="video-placeholder">
+                        <div class="video-icon">📹</div>
+                        <div class="video-name">Você</div>
+                        <div class="video-role">Paciente</div>
+                    </div>
+                </div>
+                <div class="video-frame">
+                    <div class="video-placeholder" style="background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);">
+                        <div class="video-icon">👨‍⚕️</div>
+                        <div class="video-name">Dr. João Oliveira</div>
+                        <div class="video-role">Clínico Geral</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="video-controls">
+                <button class="control-btn" title="Ativar/Desativar Microfone">🎤</button>
+                <button class="control-btn" title="Ativar/Desativar Câmera">📹</button>
+                <button class="control-btn" title="Compartilhar Tela">🖥️</button>
+                <button class="control-btn danger" title="Encerrar Chamada" onclick="showPage('dashboard')">📞</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p><strong>VidaPlus</strong> - Sistema de Gestão Hospitalar</p>
+        <p>Telemedicina segura e acessível para todos</p>
+        <p style="margin-top: 1rem; color: #999;">© 2025 VidaPlus. Todos os direitos reservados. | Suporte 24/7</p>
+    </footer>
+
+    <script>
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            // Show selected page
+            const page = document.getElementById(pageId);
+            if (page) {
+                page.classList.add('active');
+                window.scrollTo(0, 0);
+            }
+        }
+
+        function selectUserType(element, type) {
+            document.querySelectorAll('.user-type-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            element.classList.add('selected');
+        }
+
+        function switchDashboardTab(element, tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.dashboard-tab').forEach(tab => {
+                tab.style.display = 'none';
+            });
+            // Remove active class from all menu items
+            document.querySelectorAll('.menu-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            // Show selected tab
+            const tab = document.getElementById(tabName + '-tab');
+            if (tab) {
+                tab.style.display = 'block';
+            }
+            element.classList.add('active');
+        }
+    </script>
+</body>
+</html>
