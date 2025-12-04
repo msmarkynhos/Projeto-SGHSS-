@@ -17,8 +17,6 @@
             --purple: #8b5cf6;
             --purple-light: #eee6ff;
             --text-dark: #0f172a;
-            --yellow: #f59e0b;
-            --yellow-light: #fef3c7;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); color: var(--text-dark); }
@@ -67,9 +65,7 @@
         .consulta-info { font-size: 0.9rem; color: var(--muted); margin: 6px 0; }
         .badge { display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; margin-top: 8px; }
         .badge-video { background: var(--blue-light); color: var(--blue); }
-        .badge-presencial { background: var(--yellow-light); color: var(--yellow); }
-        .badge-success { background: #d1fae5; color: #059669; }
-        .badge-warning { background: #fed7aa; color: #d97706; }
+        .badge-presencial { background: #fef3c7; color: #d97706; }
         
         .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); overflow-y: auto; }
         .modal-content { background-color: var(--white); margin: 5% auto; padding: 40px; border-radius: 12px; width: 90%; max-width: 550px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
@@ -92,22 +88,6 @@
         .admin-metric h4 { margin: 0; color: var(--blue); font-weight: 700; }
         .admin-metric p { margin: 8px 0 0 0; font-size: 2rem; font-weight: 800; color: var(--blue); }
         
-        .info-box { background: var(--green-light); padding: 15px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid var(--green); }
-        .info-box h4 { margin: 0 0 8px 0; color: var(--green); font-weight: 700; }
-        .info-box p { margin: 0; color: var(--text-dark); font-size: 0.95rem; }
-        
-        .dica-card { background: var(--yellow-light); padding: 15px; border-radius: 8px; margin-bottom: 15px; border-left: 4px solid var(--yellow); }
-        .dica-card h5 { margin: 0 0 5px 0; color: var(--yellow); font-weight: 700; }
-        .dica-card p { margin: 0; color: var(--text-dark); font-size: 0.9rem; }
-        
-        .prescricao-card { background: var(--white); padding: 15px; border-radius: 8px; margin-bottom: 15px; border-left: 5px solid var(--purple); box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-        .prescricao-card h5 { margin: 0 0 8px 0; color: var(--text-dark); font-weight: 700; }
-        .prescricao-card p { margin: 4px 0; font-size: 0.9rem; color: var(--muted); }
-        
-        .leito-card { background: var(--white); padding: 15px; border-radius: 8px; margin-bottom: 15px; border-left: 5px solid var(--blue); box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-        .leito-card h5 { margin: 0 0 8px 0; color: var(--text-dark); font-weight: 700; }
-        .leito-card p { margin: 4px 0; font-size: 0.9rem; color: var(--muted); }
-        
         @media (max-width: 768px) {
             .sidebar { width: 100%; height: auto; position: relative; }
             .main-content { margin-left: 0; padding: 20px; }
@@ -120,7 +100,7 @@
 
 <!-- Login Screen -->
 <div id="login-screen-wrapper" style="padding: 20px;">
-    <div id="fakeData" style="display: none;">{"pacientes": [{"id": 1, "nome": "Ana Silva", "email": "ana@paciente.com", "cpf": "111.111.111-11", "data_nasc": "1980-05-12", "historico_medico": "Hipertensão arterial desde 2015. Histórico familiar de diabetes.", "medicamentos_uso": ["Enalapril 10mg (1x ao dia)", "AAS 100mg (1x ao dia)"], "doencas_cronicas": ["Hipertensão"], "sinais_vitais": {"peso": 75.5, "altura": 1.65, "pressao": "130/85 mmHg", "frequencia_cardiaca": "72 bpm"}, "sintomas_atuais": "Dor de cabeça leve e ocasional."}, {"id": 2, "nome": "Bruno Costa", "email": "bruno@paciente.com", "cpf": "222.222.222-22", "data_nasc": "1990-03-15", "historico_medico": "Asma brônquica diagnosticada na infância. Sem internações recentes.", "medicamentos_uso": ["Salbutamol (SOS)"], "doencas_cronicas": ["Asma"], "sinais_vitais": {"peso": 88.0, "altura": 1.80, "pressao": "120/80 mmHg", "frequencia_cardiaca": "65 bpm"}, "sintomas_atuais": "Tosse seca persistente há 3 dias."}, {"id": 3, "nome": "Carlos Oliveira", "email": "carlos@paciente.com", "cpf": "333.333.333-33", "data_nasc": "1985-07-20", "historico_medico": "Sem histórico médico relevante. Alergia a frutos do mar.", "medicamentos_uso": ["Nenhum"], "doencas_cronicas": ["Nenhuma"], "sinais_vitais": {"peso": 95.2, "altura": 1.75, "pressao": "125/75 mmHg", "frequencia_cardiaca": "80 bpm"}, "sintomas_atuais": "Dor no joelho após exercício físico."}, {"id": 4, "nome": "Diana Ferreira", "email": "diana@paciente.com", "cpf": "444.444.444-44", "data_nasc": "1992-11-08", "historico_medico": "Enxaqueca crônica. Em acompanhamento neurológico.", "medicamentos_uso": ["Sumatriptano (SOS)"], "doencas_cronicas": ["Enxaqueca Crônica"], "sinais_vitais": {"peso": 60.1, "altura": 1.70, "pressao": "110/70 mmHg", "frequencia_cardiaca": "68 bpm"}, "sintomas_atuais": "Fadiga e dificuldade de concentração."}, {"id": 5, "nome": "Eduardo Santos", "email": "eduardo@paciente.com", "cpf": "555.555.555-55", "data_nasc": "1988-01-30", "historico_medico": "Diabetes Tipo 2 diagnosticada em 2020. Controlada com dieta e medicação.", "medicamentos_uso": ["Metformina 500mg (2x ao dia)"], "doencas_cronicas": ["Diabetes Tipo 2"], "sinais_vitais": {"peso": 105.0, "altura": 1.85, "pressao": "135/90 mmHg", "frequencia_cardiaca": "78 bpm"}, "sintomas_atuais": "Aumento da sede e micção frequente."}], "medicos": [{"id": 101, "nome": "Dr. Carlos Mendes", "especialidade": "Cardiologia", "email": "carlos@medico.com", "crm": "123456-SP"}, {"id": 102, "nome": "Dra. Diana Souza", "especialidade": "Pediatria", "email": "diana@medico.com", "crm": "654321-SP"}], "consultas": [{"id": 1001, "paciente_id": 1, "medico_id": 101, "data": "2025-12-05", "hora": "10:00", "status": "Agendada", "tipo": "Cardiologia", "modalidade": "video"}, {"id": 1002, "paciente_id": 2, "medico_id": 102, "data": "2025-12-06", "hora": "14:30", "status": "Agendada", "tipo": "Pediatria", "modalidade": "presencial"}, {"id": 1003, "paciente_id": 1, "medico_id": 101, "data": "2025-11-15", "hora": "09:00", "status": "Concluida", "tipo": "Cardiologia", "modalidade": "video"}, {"id": 1004, "paciente_id": 3, "medico_id": 101, "data": "2025-12-10", "hora": "11:00", "status": "Agendada", "tipo": "Cardiologia", "modalidade": "presencial"}, {"id": 1005, "paciente_id": 4, "medico_id": 102, "data": "2025-12-12", "hora": "15:00", "status": "Agendada", "tipo": "Pediatria", "modalidade": "video"}], "prescricoes": [{"id": 2001, "paciente_id": 1, "medico_id": 101, "medicamento": "Enalapril 10mg", "dosagem": "1 comprimido ao dia", "duracao": "30 dias", "data": "2025-11-20"}, {"id": 2002, "paciente_id": 2, "medico_id": 102, "medicamento": "Salbutamol", "dosagem": "2 inalações conforme necessário", "duracao": "Contínuo", "data": "2025-11-18"}], "leitos": [{"id": 3001, "numero": "101", "andar": "1", "status": "Ocupado", "paciente": "João Silva", "data_internacao": "2025-11-20"}, {"id": 3002, "numero": "102", "andar": "1", "status": "Disponível", "paciente": null, "data_internacao": null}, {"id": 3003, "numero": "201", "andar": "2", "status": "Ocupado", "paciente": "Maria Santos", "data_internacao": "2025-11-22"}, {"id": 3004, "numero": "202", "andar": "2", "status": "Disponível", "paciente": null, "data_internacao": null}], "admin_metrics": {"servidores_ativos": 12, "tickets_abertos": 5, "contratacoes_mes": 3, "uptime_medio": "99.98%", "licencas_software": 450, "disponibilidade_sistema": "99.5%", "backups_realizados": 24}}</div>
+    <div id="fakeData" style="display: none;">{"pacientes": [{"id": 1, "nome": "Ana Silva", "email": "ana@paciente.com", "cpf": "111.111.111-11", "data_nasc": "1980-05-12", "historico_medico": "Hipertensão arterial desde 2015. Histórico familiar de diabetes.", "medicamentos_uso": ["Enalapril 10mg (1x ao dia)", "AAS 100mg (1x ao dia)"], "doencas_cronicas": ["Hipertensão"], "sinais_vitais": {"peso": 75.5, "altura": 1.65, "pressao": "130/85 mmHg", "frequencia_cardiaca": "72 bpm"}, "sintomas_atuais": "Dor de cabeça leve e ocasional."}, {"id": 2, "nome": "Bruno Costa", "email": "bruno@paciente.com", "cpf": "222.222.222-22", "data_nasc": "1990-03-15", "historico_medico": "Asma brônquica diagnosticada na infância. Sem internações recentes.", "medicamentos_uso": ["Salbutamol (SOS)"], "doencas_cronicas": ["Asma"], "sinais_vitais": {"peso": 88.0, "altura": 1.80, "pressao": "120/80 mmHg", "frequencia_cardiaca": "65 bpm"}, "sintomas_atuais": "Tosse seca persistente há 3 dias."}, {"id": 3, "nome": "Carlos Oliveira", "email": "carlos@paciente.com", "cpf": "333.333.333-33", "data_nasc": "1985-07-20", "historico_medico": "Sem histórico médico relevante. Alergia a frutos do mar.", "medicamentos_uso": ["Nenhum"], "doencas_cronicas": ["Nenhuma"], "sinais_vitais": {"peso": 95.2, "altura": 1.75, "pressao": "125/75 mmHg", "frequencia_cardiaca": "80 bpm"}, "sintomas_atuais": "Dor no joelho após exercício físico."}, {"id": 4, "nome": "Diana Ferreira", "email": "diana@paciente.com", "cpf": "444.444.444-44", "data_nasc": "1992-11-08", "historico_medico": "Enxaqueca crônica. Em acompanhamento neurológico.", "medicamentos_uso": ["Sumatriptano (SOS)"], "doencas_cronicas": ["Enxaqueca Crônica"], "sinais_vitais": {"peso": 60.1, "altura": 1.70, "pressao": "110/70 mmHg", "frequencia_cardiaca": "68 bpm"}, "sintomas_atuais": "Fadiga e dificuldade de concentração."}, {"id": 5, "nome": "Eduardo Santos", "email": "eduardo@paciente.com", "cpf": "555.555.555-55", "data_nasc": "1988-01-30", "historico_medico": "Diabetes Tipo 2 diagnosticada em 2020. Controlada com dieta e medicação.", "medicamentos_uso": ["Metformina 500mg (2x ao dia)"], "doencas_cronicas": ["Diabetes Tipo 2"], "sinais_vitais": {"peso": 105.0, "altura": 1.85, "pressao": "135/90 mmHg", "frequencia_cardiaca": "78 bpm"}, "sintomas_atuais": "Aumento da sede e micção frequente."}], "medicos": [{"id": 101, "nome": "Dr. Carlos Mendes", "especialidade": "Cardiologia", "email": "carlos@medico.com"}, {"id": 102, "nome": "Dra. Diana Souza", "especialidade": "Pediatria", "email": "diana@medico.com"}], "consultas": [{"id": 1001, "paciente_id": 1, "medico_id": 101, "data": "2025-12-05", "hora": "10:00", "status": "Agendada", "tipo": "Cardiologia", "modalidade": "video"}, {"id": 1002, "paciente_id": 2, "medico_id": 102, "data": "2025-12-06", "hora": "14:30", "status": "Agendada", "tipo": "Pediatria", "modalidade": "presencial"}, {"id": 1003, "paciente_id": 1, "medico_id": 101, "data": "2025-11-15", "hora": "09:00", "status": "Concluida", "tipo": "Cardiologia", "modalidade": "video"}, {"id": 1004, "paciente_id": 3, "medico_id": 101, "data": "2025-12-10", "hora": "11:00", "status": "Agendada", "tipo": "Cardiologia", "modalidade": "presencial"}, {"id": 1005, "paciente_id": 4, "medico_id": 102, "data": "2025-12-12", "hora": "15:00", "status": "Agendada", "tipo": "Pediatria", "modalidade": "video"}], "admin_metrics": {"servidores_ativos": 12, "tickets_abertos": 5, "contratacoes_mes": 3, "uptime_medio": "99.98%", "licencas_software": 450}}</div>
     <div class="login-container">
         <div class="login-sidebar">
             <div>
@@ -201,30 +181,16 @@
     </aside>
     
     <main class="main-content">
-        <!-- Dashboard Page - Paciente -->
+        <!-- Dashboard Page -->
         <div id="homePage" class="page active">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
-                <div>
-                    <h2 style="font-size: 2rem; margin-bottom: 10px;">Dashboard</h2>
-                    <p id="welcome-message" style="color: var(--muted);">Bem-vindo ao VidaPlus!</p>
-                </div>
-                <button class="btnPrimary" onclick="openAgendarModal()" style="padding: 12px 24px; font-size: 1rem;">+ Agendar Consulta</button>
-            </div>
-            
+            <h2 style="font-size: 2rem; margin-bottom: 10px;">Dashboard</h2>
+            <p id="welcome-message" style="color: var(--muted); margin-bottom: 30px;">Bem-vindo ao VidaPlus!</p>
             <div class="stats-grid">
-                <div class="stat-card"><h3>Peso</h3><p id="stat-peso">75.5 kg</p></div>
-                <div class="stat-card"><h3>Altura</h3><p id="stat-altura">1.65 m</p></div>
-                <div class="stat-card"><h3>Próxima Consulta</h3><p id="stat-dias-proxima">2 dias</p></div>
-                <div class="stat-card"><h3>Pressão Arterial</h3><p id="stat-pressao">130/85</p></div>
+                <div class="stat-card"><h3>Consultas Agendadas</h3><p id="stat-agendadas">0</p></div>
+                <div class="stat-card"><h3>Próxima Consulta</h3><p id="stat-proxima-data">N/A</p></div>
+                <div class="stat-card"><h3>Prontuário Atualizado</h3><p id="stat-prontuario-data">N/A</p></div>
             </div>
-            
-            <div class="info-box">
-                <h4>Sua Próxima Consulta</h4>
-                <p id="proxima-consulta-info">Cardiologia com Dr. Carlos Mendes em 05/12/2025 às 10:00</p>
-            </div>
-            
-            <h3 style="margin-top: 40px; margin-bottom: 20px;">Dicas e Orientações Médicas</h3>
-            <div id="dicas-container"></div>
+            <div id="proximasConsultasList" style="margin-top: 40px;"></div>
         </div>
         
         <!-- Minhas Consultas (Paciente) -->
@@ -331,59 +297,12 @@
             </div>
         </div>
         
-        <!-- Prescrições (Profissional) -->
-        <div id="prescricoesPage" class="page">
-            <h2 style="font-size: 2rem; margin-bottom: 10px;">Prescrições Digitais</h2>
-            <p style="color: var(--muted); margin-bottom: 30px;">Gerencie as prescrições dos pacientes</p>
-            <div class="card">
-                <h3 style="margin-bottom: 20px;">Emitir Nova Prescrição</h3>
-                <label>Paciente</label>
-                <select id="prescricaoPaciente">
-                    <option value="">Selecione um paciente</option>
-                </select>
-                <label>Medicamento</label>
-                <input id="prescricaoMedicamento" type="text" placeholder="Nome do medicamento" />
-                <label>Dosagem</label>
-                <input id="prescricaoDosagem" type="text" placeholder="Ex: 1 comprimido ao dia" />
-                <label>Duração do Tratamento</label>
-                <input id="prescricaoDuracao" type="text" placeholder="Ex: 30 dias" />
-                <button class="btnPrimary" onclick="salvarPrescricao()" style="width: 100%; margin-top: 20px;">Emitir Prescrição</button>
-            </div>
-            
-            <h3 style="margin-top: 40px; margin-bottom: 20px;">Prescrições Recentes</h3>
-            <div id="prescricoesListContent"></div>
-        </div>
-        
-        <!-- Leitos (Admin) -->
-        <div id="leitosPage" class="page">
-            <h2 style="font-size: 2rem; margin-bottom: 10px;">Controle de Leitos</h2>
-            <p style="color: var(--muted); margin-bottom: 30px;">Gerencie a disponibilidade de leitos hospitalares</p>
-            <div class="card">
-                <div id="leitosContent"></div>
-            </div>
-        </div>
-        
-        <!-- Relatórios Financeiros (Admin) -->
+        <!-- Relatórios -->
         <div id="relatoriosPage" class="page">
-            <h2 style="font-size: 2rem; margin-bottom: 10px;">Relatórios e Métricas</h2>
-            <p style="color: var(--muted); margin-bottom: 30px;">Informações financeiras e de desempenho do sistema</p>
+            <h2 style="font-size: 2rem; margin-bottom: 10px;">Relatórios</h2>
+            <p style="color: var(--muted); margin-bottom: 30px;">Informações e estatísticas do sistema</p>
             <div class="card">
                 <div id="relatoriosContent"></div>
-            </div>
-        </div>
-        
-        <!-- Segurança e Compliance (Admin) -->
-        <div id="segurancaPage" class="page">
-            <h2 style="font-size: 2rem; margin-bottom: 10px;">Segurança e Compliance (LGPD)</h2>
-            <p style="color: var(--muted); margin-bottom: 30px;">Controle de acesso, logs de auditoria e conformidade</p>
-            <div class="card">
-                <h3 style="margin-bottom: 20px;">Registros de Auditoria</h3>
-                <div id="auditLogContent"></div>
-            </div>
-            
-            <div class="card">
-                <h3 style="margin-bottom: 20px;">Controle de Acesso (RBAC)</h3>
-                <div id="rbacContent"></div>
             </div>
         </div>
         
@@ -398,8 +317,6 @@
                 <input id="medicName" type="text" placeholder="Nome do médico" />
                 <label>Especialidade</label>
                 <input id="medicSpecialty" type="text" placeholder="Especialidade" />
-                <label>CRM</label>
-                <input id="medicCRM" type="text" placeholder="Número do CRM" />
                 <button class="btnPrimary" onclick="salvarMedico()">Salvar Médico</button>
             </div>
             
@@ -411,7 +328,7 @@
             </div>
             
             <div class="card">
-                <h3 style="margin-bottom: 20px;">Métricas de TI e Disponibilidade</h3>
+                <h3 style="margin-bottom: 20px;">Métricas de TI e Gestão</h3>
                 <div id="tarefasAdmin"></div>
             </div>
         </div>
@@ -502,7 +419,6 @@ function updateMenuByProfile() {
             <a onclick="showPage('homePage')">📊 Dashboard</a>
             <a onclick="showPage('agendaPage')">📅 Minha Agenda</a>
             <a onclick="showPage('prontuariosPage')">📋 Prontuários</a>
-            <a onclick="showPage('prescricoesPage')">💊 Prescrições</a>
             <a onclick="showPage('relatoriosPage')">📊 Relatórios</a>
             <a onclick="logout()">🚪 Sair</a>
         `;
@@ -510,10 +426,8 @@ function updateMenuByProfile() {
         menuContainer.innerHTML = `
             <a onclick="showPage('homePage')">📊 Dashboard</a>
             <a onclick="showPage('agendaPage')">📅 Agenda Geral</a>
-            <a onclick="showPage('leitosPage')">🛏️ Leitos</a>
-            <a onclick="showPage('relatoriosPage')">💰 Relatórios Financeiros</a>
-            <a onclick="showPage('segurancaPage')">🔒 Segurança e Compliance</a>
             <a onclick="showPage('cadastroPage')">⚙️ Gestão de TI</a>
+            <a onclick="showPage('relatoriosPage')">📊 Relatórios</a>
             <a onclick="logout()">🚪 Sair</a>
         `;
     }
@@ -547,14 +461,8 @@ function showPage(id) {
             renderProntuarios();
         } else if (id === 'videoPage') {
             renderVideoConsultas();
-        } else if (id === 'prescricoesPage') {
-            renderPrescricoes();
-        } else if (id === 'leitosPage') {
-            renderLeitos();
         } else if (id === 'relatoriosPage') {
             renderRelatorios();
-        } else if (id === 'segurancaPage') {
-            renderSeguranca();
         } else if (id === 'cadastroPage') {
             renderCadastro();
         } else if (id === 'homePage') {
@@ -564,67 +472,28 @@ function showPage(id) {
 }
 
 function loadDashboard() {
-    if (userProfile === 'patient') {
-        const paciente = fakeData.pacientes.find(p => p.id === currentPatientId);
-        const consultas = fakeData.consultas.filter(c => c.paciente_id === currentPatientId && c.status === 'Agendada');
-        
-        // Atualizar estatísticas do paciente
-        document.getElementById('stat-peso').textContent = paciente.sinais_vitais.peso + ' kg';
-        document.getElementById('stat-altura').textContent = paciente.sinais_vitais.altura + ' m';
-        document.getElementById('stat-pressao').textContent = paciente.sinais_vitais.pressao;
-        
-        // Calcular dias para próxima consulta
-        if (consultas.length > 0) {
-            const proximaConsulta = consultas[0];
-            const dataConsulta = new Date(proximaConsulta.data);
-            const hoje = new Date();
-            const diasFaltam = Math.ceil((dataConsulta - hoje) / (1000 * 60 * 60 * 24));
-            document.getElementById('stat-dias-proxima').textContent = diasFaltam + ' dias';
-            
-            const medico = fakeData.medicos.find(m => m.id === proximaConsulta.medico_id);
-            document.getElementById('proxima-consulta-info').textContent = `${proximaConsulta.tipo} com ${medico.nome} em ${proximaConsulta.data} às ${proximaConsulta.hora}`;
-        }
-        
-        // Carregar dicas de remédios e orientações
-        renderDicas();
-    } else if (userProfile === 'professional') {
-        const stats = `
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
-                <div class="stat-card"><h3>Pacientes Atendidos</h3><p>${fakeData.consultas.length}</p></div>
-                <div class="stat-card"><h3>Consultas Hoje</h3><p>3</p></div>
-                <div class="stat-card"><h3>Prescrições Pendentes</h3><p>${fakeData.prescricoes.length}</p></div>
-            </div>
-        `;
-        document.querySelector('#homePage .stats-grid').innerHTML = stats;
-    } else if (userProfile === 'admin') {
-        const stats = `
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
-                <div class="stat-card"><h3>Pacientes Cadastrados</h3><p>${fakeData.pacientes.length}</p></div>
-                <div class="stat-card"><h3>Profissionais</h3><p>${fakeData.medicos.length}</p></div>
-                <div class="stat-card"><h3>Leitos Disponíveis</h3><p>${fakeData.leitos.filter(l => l.status === 'Disponível').length}</p></div>
-                <div class="stat-card"><h3>Disponibilidade do Sistema</h3><p>${fakeData.admin_metrics.disponibilidade_sistema}</p></div>
-            </div>
-        `;
-        document.querySelector('#homePage .stats-grid').innerHTML = stats;
-    }
-}
-
-function renderDicas() {
-    const container = document.getElementById('dicas-container');
-    const dicas = [
-        { titulo: 'Medicamentos', descricao: 'Tome seus medicamentos sempre no mesmo horário para melhor eficácia. Não interrompa o tratamento sem orientação médica.' },
-        { titulo: 'Alimentação', descricao: 'Mantenha uma dieta equilibrada com frutas, vegetais e proteínas. Reduza o consumo de sal e açúcar.' },
-        { titulo: 'Exercício Físico', descricao: 'Pratique atividades físicas regularmente. Caminhe pelo menos 30 minutos por dia, 5 dias por semana.' },
-        { titulo: 'Hidratação', descricao: 'Beba pelo menos 2 litros de água por dia. Evite bebidas açucaradas e alcoólicas.' },
-        { titulo: 'Sono', descricao: 'Durma de 7 a 8 horas por noite. Mantenha uma rotina regular de sono.' }
-    ];
+    const consultas = fakeData.consultas;
+    const agendadas = consultas.filter(c => c.status === 'Agendada').length;
     
-    container.innerHTML = '';
-    dicas.forEach(dica => {
-        container.innerHTML += `
-            <div class="dica-card">
-                <h5>${dica.titulo}</h5>
-                <p>${dica.descricao}</p>
+    document.getElementById('stat-agendadas').textContent = agendadas;
+    document.getElementById('stat-proxima-data').textContent = '05/12/2025 às 10:00';
+    document.getElementById('stat-prontuario-data').textContent = '15/11/2025';
+    
+    const proximasConsultasList = document.getElementById('proximasConsultasList');
+    proximasConsultasList.innerHTML = '<h3 style="margin-bottom: 20px;">Próximas Consultas</h3>';
+    
+    consultas.filter(c => c.status === 'Agendada').forEach(c => {
+        const paciente = fakeData.pacientes.find(p => p.id === c.paciente_id);
+        const medico = fakeData.medicos.find(m => m.id === c.medico_id);
+        const modalidadeBadge = c.modalidade === 'video' ? '<span class="badge badge-video">Vídeo Chamada</span>' : '<span class="badge badge-presencial">Presencial</span>';
+        proximasConsultasList.innerHTML += `
+            <div class="consulta-card">
+                <h4>${c.tipo}</h4>
+                <div class="consulta-info"><strong>Paciente:</strong> ${paciente.nome}</div>
+                <div class="consulta-info"><strong>Médico:</strong> ${medico.nome}</div>
+                <div class="consulta-info"><strong>Data:</strong> ${c.data} às ${c.hora}</div>
+                ${modalidadeBadge}
+                <button class="btnPrimary" style="margin-top: 15px; width: 100%;" onclick="iniciarVideoChamada()">📹 Iniciar Vídeo Chamada</button>
             </div>
         `;
     });
@@ -833,80 +702,32 @@ function renderVideoConsultas() {
     });
 }
 
-function renderPrescricoes() {
-    // Preencher select de pacientes
-    const selectPaciente = document.getElementById('prescricaoPaciente');
-    selectPaciente.innerHTML = '<option value="">Selecione um paciente</option>';
-    fakeData.pacientes.forEach(p => {
-        selectPaciente.innerHTML += `<option value="${p.id}">${p.nome}</option>`;
-    });
-    
-    // Renderizar prescrições recentes
-    const container = document.getElementById('prescricoesListContent');
-    container.innerHTML = '';
-    
-    fakeData.prescricoes.forEach(p => {
-        const paciente = fakeData.pacientes.find(pac => pac.id === p.paciente_id);
-        const medico = fakeData.medicos.find(m => m.id === p.medico_id);
-        container.innerHTML += `
-            <div class="prescricao-card">
-                <h5>${p.medicamento}</h5>
-                <p><strong>Paciente:</strong> ${paciente.nome}</p>
-                <p><strong>Dosagem:</strong> ${p.dosagem}</p>
-                <p><strong>Duração:</strong> ${p.duracao}</p>
-                <p><strong>Data de Emissão:</strong> ${p.data}</p>
-            </div>
-        `;
-    });
-}
-
-function renderLeitos() {
-    const container = document.getElementById('leitosContent');
-    container.innerHTML = '';
-    
-    fakeData.leitos.forEach(leito => {
-        const statusBadge = leito.status === 'Disponível' ? '<span class="badge badge-success">Disponível</span>' : '<span class="badge badge-warning">Ocupado</span>';
-        container.innerHTML += `
-            <div class="leito-card">
-                <h5>Leito ${leito.numero} - Andar ${leito.andar}</h5>
-                <p><strong>Status:</strong> ${statusBadge}</p>
-                ${leito.paciente ? `<p><strong>Paciente:</strong> ${leito.paciente}</p>` : ''}
-                ${leito.data_internacao ? `<p><strong>Data de Internação:</strong> ${leito.data_internacao}</p>` : ''}
-            </div>
-        `;
-    });
-}
-
 function renderRelatorios() {
     const container = document.getElementById('relatoriosContent');
     
     if (userProfile === 'admin') {
-        container.innerHTML = `
-            <h3 style="margin-bottom: 20px;">Relatórios Financeiros e de Desempenho</h3>
+        container.innerHTML = '<h3 style="margin-bottom: 20px;">Métricas do Sistema</h3>';
+        container.innerHTML += `
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
                 <div class="admin-metric">
-                    <h4>Receita Mensal</h4>
-                    <p>R$ 125.450</p>
+                    <h4>Servidores Ativos</h4>
+                    <p>${fakeData.admin_metrics.servidores_ativos}</p>
                 </div>
                 <div class="admin-metric">
-                    <h4>Despesas Operacionais</h4>
-                    <p>R$ 85.320</p>
+                    <h4>Tickets Abertos</h4>
+                    <p>${fakeData.admin_metrics.tickets_abertos}</p>
                 </div>
                 <div class="admin-metric">
-                    <h4>Lucro Líquido</h4>
-                    <p>R$ 40.130</p>
+                    <h4>Contratações (Mês)</h4>
+                    <p>${fakeData.admin_metrics.contratacoes_mes}</p>
                 </div>
                 <div class="admin-metric">
-                    <h4>Taxa de Ocupação</h4>
-                    <p>75%</p>
+                    <h4>Uptime Médio</h4>
+                    <p>${fakeData.admin_metrics.uptime_medio}</p>
                 </div>
                 <div class="admin-metric">
-                    <h4>Pacientes Atendidos</h4>
-                    <p>${fakeData.pacientes.length}</p>
-                </div>
-                <div class="admin-metric">
-                    <h4>Consultas Realizadas</h4>
-                    <p>${fakeData.consultas.length}</p>
+                    <h4>Licenças de Software</h4>
+                    <p>${fakeData.admin_metrics.licencas_software}</p>
                 </div>
             </div>
         `;
@@ -926,75 +747,26 @@ function renderRelatorios() {
     }
 }
 
-function renderSeguranca() {
-    // Audit Log
-    const auditContainer = document.getElementById('auditLogContent');
-    auditContainer.innerHTML = `
-        <div style="max-height: 300px; overflow-y: auto;">
-            <div style="padding: 10px; border-bottom: 1px solid #eee; font-size: 0.9rem;">
-                <p><strong>[2025-12-03 10:30]</strong> Usuário ana@paciente.com acessou prontuário</p>
-            </div>
-            <div style="padding: 10px; border-bottom: 1px solid #eee; font-size: 0.9rem;">
-                <p><strong>[2025-12-03 09:45]</strong> Usuário carlos@medico.com emitiu prescrição</p>
-            </div>
-            <div style="padding: 10px; border-bottom: 1px solid #eee; font-size: 0.9rem;">
-                <p><strong>[2025-12-03 08:20]</strong> Usuário admin@vidaplus.com.br alterou dados de leito</p>
-            </div>
-            <div style="padding: 10px; border-bottom: 1px solid #eee; font-size: 0.9rem;">
-                <p><strong>[2025-12-02 15:10]</strong> Usuário diana@medico.com realizou teleconsulta</p>
-            </div>
-        </div>
-    `;
-    
-    // RBAC
-    const rbacContainer = document.getElementById('rbacContent');
-    rbacContainer.innerHTML = `
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-            <div style="padding: 15px; background: var(--green-light); border-radius: 8px;">
-                <h5 style="color: var(--green); margin-bottom: 10px;">Paciente</h5>
-                <p style="font-size: 0.9rem; margin: 5px 0;">✓ Visualizar próprio prontuário</p>
-                <p style="font-size: 0.9rem; margin: 5px 0;">✓ Agendar consultas</p>
-                <p style="font-size: 0.9rem; margin: 5px 0;">✓ Acessar telemedicina</p>
-                <p style="font-size: 0.9rem; margin: 5px 0;">✗ Editar dados de outros</p>
-            </div>
-            <div style="padding: 15px; background: var(--blue-light); border-radius: 8px;">
-                <h5 style="color: var(--blue); margin-bottom: 10px;">Profissional</h5>
-                <p style="font-size: 0.9rem; margin: 5px 0;">✓ Visualizar prontuários</p>
-                <p style="font-size: 0.9rem; margin: 5px 0;">✓ Emitir prescrições</p>
-                <p style="font-size: 0.9rem; margin: 5px 0;">✓ Gerenciar agenda</p>
-                <p style="font-size: 0.9rem; margin: 5px 0;">✗ Acessar dados financeiros</p>
-            </div>
-            <div style="padding: 15px; background: var(--purple-light); border-radius: 8px;">
-                <h5 style="color: var(--purple); margin-bottom: 10px;">Administrador</h5>
-                <p style="font-size: 0.9rem; margin: 5px 0;">✓ Acesso total ao sistema</p>
-                <p style="font-size: 0.9rem; margin: 5px 0;">✓ Gerenciar usuários</p>
-                <p style="font-size: 0.9rem; margin: 5px 0;">✓ Visualizar relatórios</p>
-                <p style="font-size: 0.9rem; margin: 5px 0;">✓ Controlar leitos</p>
-            </div>
-        </div>
-    `;
-}
-
 function renderCadastro() {
     const container = document.getElementById('tarefasAdmin');
-    container.innerHTML = '<h3 style="margin-bottom: 20px;">Métricas de TI e Disponibilidade</h3>';
+    container.innerHTML = '<h3 style="margin-bottom: 20px;">Tarefas de TI e Gestão</h3>';
     
-    const metricas = [
-        { titulo: 'Servidores Ativos', valor: fakeData.admin_metrics.servidores_ativos, status: 'success' },
-        { titulo: 'Disponibilidade do Sistema', valor: fakeData.admin_metrics.disponibilidade_sistema, status: 'success' },
-        { titulo: 'Uptime Médio', valor: fakeData.admin_metrics.uptime_medio, status: 'success' },
-        { titulo: 'Backups Realizados', valor: fakeData.admin_metrics.backups_realizados, status: 'success' },
-        { titulo: 'Tickets de TI Abertos', valor: fakeData.admin_metrics.tickets_abertos, status: 'warning' },
-        { titulo: 'Licenças de Software', valor: fakeData.admin_metrics.licencas_software, status: 'info' }
+    const tarefas = [
+        { titulo: 'Atualizar logo do sistema', status: 'Pendente', departamento: 'TI', prioridade: 'Alta' },
+        { titulo: 'Revisar contratos de novos médicos', status: 'Em Andamento', departamento: 'RH', prioridade: 'Média' },
+        { titulo: 'Auditoria de segurança de dados', status: 'Concluída', departamento: 'TI', prioridade: 'Alta' },
+        { titulo: 'Implementar backup automático', status: 'Pendente', departamento: 'TI', prioridade: 'Alta' },
+        { titulo: 'Atualizar certificado SSL', status: 'Em Andamento', departamento: 'TI', prioridade: 'Crítica' }
     ];
     
-    metricas.forEach(m => {
-        const cor = m.status === 'success' ? 'var(--green)' : (m.status === 'warning' ? 'var(--yellow)' : 'var(--blue)');
-        const bgCor = m.status === 'success' ? '#d1fae5' : (m.status === 'warning' ? '#fef3c7' : '#e0f2fe');
+    tarefas.forEach(t => {
+        const corStatus = t.status === 'Concluída' ? '#10b981' : (t.status === 'Em Andamento' ? '#f59e0b' : '#ef4444');
         container.innerHTML += `
-            <div style="margin-top: 15px; padding: 15px; border-left: 5px solid ${cor}; background: ${bgCor}; border-radius: 10px;">
-                <h4 style="color: ${cor};">${m.titulo}</h4>
-                <p style="font-size: 1.5rem; font-weight: 700; color: ${cor}; margin-top: 8px;">${m.valor}</p>
+            <div style="margin-top: 15px; padding: 15px; border-left: 5px solid ${corStatus}; background: #f9f9f9; border-radius: 10px;">
+                <h4>${t.titulo}</h4>
+                <p><strong>Departamento:</strong> ${t.departamento}</p>
+                <p><strong>Status:</strong> <span style="color: ${corStatus}; font-weight: 700;">${t.status}</span></p>
+                <p><strong>Prioridade:</strong> ${t.prioridade}</p>
             </div>
         `;
     });
@@ -1044,30 +816,11 @@ function salvarConsulta() {
     document.getElementById('consultaMotivo').value = '';
 }
 
-function salvarPrescricao() {
-    const paciente = document.getElementById('prescricaoPaciente').value;
-    const medicamento = document.getElementById('prescricaoMedicamento').value;
-    const dosagem = document.getElementById('prescricaoDosagem').value;
-    const duracao = document.getElementById('prescricaoDuracao').value;
-    
-    if (!paciente || !medicamento || !dosagem || !duracao) {
-        alert('Preencha todos os campos!');
-        return;
-    }
-    
-    alert('Prescrição emitida com sucesso para o paciente!');
-    document.getElementById('prescricaoPaciente').value = '';
-    document.getElementById('prescricaoMedicamento').value = '';
-    document.getElementById('prescricaoDosagem').value = '';
-    document.getElementById('prescricaoDuracao').value = '';
-}
-
 function salvarMedico() {
     const nome = document.getElementById('medicName').value;
     const especialidade = document.getElementById('medicSpecialty').value;
-    const crm = document.getElementById('medicCRM').value;
     
-    if (!nome || !especialidade || !crm) {
+    if (!nome || !especialidade) {
         alert('Preencha todos os campos!');
         return;
     }
@@ -1075,7 +828,6 @@ function salvarMedico() {
     alert('Médico ' + nome + ' (' + especialidade + ') salvo com sucesso!');
     document.getElementById('medicName').value = '';
     document.getElementById('medicSpecialty').value = '';
-    document.getElementById('medicCRM').value = '';
 }
 
 function salvarCapa() {
@@ -1183,3 +935,4 @@ function enviarRecuperacao() {
 
 </body>
 </html>
+
